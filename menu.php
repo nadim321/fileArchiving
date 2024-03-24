@@ -61,7 +61,7 @@ https://templatemo.com/tm-571-hexashop
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="index.php" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="user_list.php">User</a></li>
-                            <li class="scroll-to-section"><a href="#women">Doc Upload</a></li>
+                            <li class="scroll-to-section"><a href="thesis_add.php">Doc Upload</a></li>
                             <li class="scroll-to-section"><a href="#kids">Upload request</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Pages</a>
@@ -81,7 +81,7 @@ https://templatemo.com/tm-571-hexashop
                                     <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a></li>
                                 </ul>
                             </li>
-                            <li class="scroll-to-section"><a href="#explore">Explore</a></li>
+                            <li style="float: right"><a href="logout.php">Logout</a></li>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>

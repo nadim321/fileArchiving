@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2019 at 07:18 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.5.37
+-- Generation Time: Mar 24, 2024 at 06:58 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -62,9 +63,10 @@ CREATE TABLE `likecount` (
 --
 
 INSERT INTO `likecount` (`id`, `username`, `story_id`, `like_dislike`) VALUES
-(1, 'nadim', 2, 0),
+(1, 'nadim', 2, 1),
 (3, 'nadim', 1, 1),
-(4, 'nadim', 3, 1);
+(4, 'nadim', 3, 1),
+(5, 'nadim', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -75,7 +77,7 @@ INSERT INTO `likecount` (`id`, `username`, `story_id`, `like_dislike`) VALUES
 CREATE TABLE `login` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `login_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `login_date_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -96,9 +98,34 @@ CREATE TABLE `story` (
 --
 
 INSERT INTO `story` (`id`, `description`, `photo_url`, `username`) VALUES
-(1, 'Our new Mind Mapping tool maintains a good balance of simplicity and function and helps you bring your ideas to life. Give it a try and don''t hesitate to share your feedback with us!', 'story_image/1575482243.png', 'nadim'),
+(1, 'Our new Mind Mapping tool maintains a good balance of simplicity and function and helps you bring your ideas to life. Give it a try and don\'t hesitate to share your feedback with us!', 'story_image/1575482243.png', 'nadim'),
 (2, 'HP laptop price varies from model to model depending on the specifications and designs of the laptops. We bring you a sea full of different options of laptops ', 'story_image/1575570102.png', 'nadim'),
 (5, 'You can use the CSS3 resize property to remove or turn-off the default horizontal and vertical resizable property of the HTML ', 'story_image/1575637873.png', 'nadim');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `thesis`
+--
+
+CREATE TABLE `thesis` (
+  `id` int(11) NOT NULL,
+  `title` varchar(1024) NOT NULL,
+  `abstract` varchar(5000) NOT NULL,
+  `file_path` varchar(5000) NOT NULL,
+  `status` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `thesis`
+--
+
+INSERT INTO `thesis` (`id`, `title`, `abstract`, `file_path`, `status`, `username`) VALUES
+(1, 'Catelent-Template', 'sd', 'thesis_doc/1711301480.pdf', 1, 'nadim'),
+(2, 'ddsf', 'sdf', 'thesis_doc/1711301488.pdf', 1, 'nadim'),
+(3, 'afds', 'sdaa', 'thesis_doc/1711301697.pdf', 1, 'nadim'),
+(4, 'werewr', 'werw', 'thesis_doc/1711301769.pdf', 0, 'naddim');
 
 -- --------------------------------------------------------
 
@@ -113,17 +140,19 @@ CREATE TABLE `user` (
   `phone` varchar(30) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `profile_pic` varchar(512) NOT NULL
+  `profile_pic` varchar(512) NOT NULL,
+  `role` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`firstName`, `lastName`, `email`, `phone`, `username`, `password`, `profile_pic`) VALUES
-('sad', 'sad', 'nahidul.haque.31@gmail.com', '4545554', 'naddim', '$2y$10$QKe1M23tvLQDOMCrOjZiFORrE91S/PoyZINP4D7ANmz4S5w08ZHSq', 'profile_pic/1575647224.webp'),
-('Nadimul', 'Haque', 'nadim@gmail.com', '5544122', 'nadim', '$2y$10$6uJoAvWKkMAdiV3ZjM61ienUltbhYPBea3BxJW.WT5ExTzfYpy4Ei', 'profile_pic/1575645967.png'),
-('Nahidul', 'Haque', 'nahid@gmail.com', '4545554', 'nahid', '$2y$10$XnSxGAS7QBLTaTSkz8sk1uTDbQMsJgE3O//nBWAPAf53ZYBslw8b2', 'profile_pic/1575644158.png');
+INSERT INTO `user` (`firstName`, `lastName`, `email`, `phone`, `username`, `password`, `profile_pic`, `role`) VALUES
+('sad', 'sad', 'nahidul.haque.31@gmail.com', '4545554', 'naddim', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1575647224.webp', 'user'),
+('Nadimul', 'Haque', 'nadim.hq321@gmail.com', '5544122', 'nadim', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1575645967.png', 'admin'),
+('Nahidul', 'Haque', 'nahid@gmail.com', '4545554', 'nahid', '$2y$10$XnSxGAS7QBLTaTSkz8sk1uTDbQMsJgE3O//nBWAPAf53ZYBslw8b2', 'profile_pic/1575644158.png', 'user'),
+('nadim', 'ff', 'wew@gmail.com', '01827090222', 'nnnn', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1710947652.png', 'user');
 
 --
 -- Indexes for dumped tables
@@ -154,6 +183,12 @@ ALTER TABLE `story`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `thesis`
+--
+ALTER TABLE `thesis`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -168,21 +203,32 @@ ALTER TABLE `user`
 --
 ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `likecount`
 --
 ALTER TABLE `likecount`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `story`
 --
 ALTER TABLE `story`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `thesis`
+--
+ALTER TABLE `thesis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
