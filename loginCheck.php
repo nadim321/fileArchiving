@@ -26,7 +26,9 @@ if ($paramsok) {
                 $_SESSION["role"] = $role;
                 $_SESSION["isLoggedIn"] = true;
 
-                header("location: index.php");
+                header("location: thesis_list.php");
+            }else {
+                header("location: login.php");
             }
         }
 

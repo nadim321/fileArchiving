@@ -3,11 +3,26 @@ include "menu.php";
 include 'connect.php';
 $loggedInUser = $_SESSION["username"];
 ?>
+
   <body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#userList').dataTable({
+          "paging" : true,
+          "ordering" : true,
+          "info"  : false,
+          "searching" : true 
+        }); 
+    }); 
+</script>
+
+ 
+ <body>
 
 <?php
 // query for get story for logged in user
-$sql = "SELECT * FROM user where role != 'admin' order by username asc";
+$sql = "SELECT * FROM user where role != 'admin' and deleted = 0 order by username asc";
 $stmt = $dbh->prepare($sql);
 $params = [$loggedInUser];
 $result = $stmt->execute($params);
@@ -16,7 +31,7 @@ $result = $stmt->execute($params);
 if ($stmt->rowCount()) {
     $i=1;
     // show story table
-    echo "<div align='center'> <table border='1px solid gray' width='70%'> <tr><th>SL</th><th>Username</th><th>Name</th><th>Image</th><th>Edit</th><th>Delete</th></tr>";
+    echo "<div align='center'> <table id='userList'  class='table table-striped table-bordered'> <thead><tr><th>SL</th><th>Username</th><th>Name</th><th>Image</th><th>Edit</th><th>Delete</th></tr></thead><tbody>";
     while ($row = $stmt->fetch()) {
         //make a list of data with each row
         $username = $row["username"];
@@ -37,7 +52,7 @@ if ($stmt->rowCount()) {
         $i++;
 
     }
-    echo "</table></div>";
+    echo "</tbody></table></div>";
 }
 
 ?>
@@ -46,11 +61,11 @@ if ($stmt->rowCount()) {
 </html>
 
 <script type="text/javascript">
-
+    
     // delete story
     function deleteUser(username) {
         if(window.confirm("Do you want to delete the user ???")) {
-            window.location.href = "delete_user.php?user_id=" + id;
+            window.location.href = "delete_user.php?user_id=" + username;
         }
     }
 </script>

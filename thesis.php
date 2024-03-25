@@ -3,25 +3,21 @@ class story
 {
     // Properties
     private $id;
-    private $description;
-    private $photo_url;
+    private $title;
+    private $abstract;
     private $username;
-    private $email;
+    private $file_path;
+    private $status;
 
-    /**
-     * story constructor.
-     * @param $id
-     * @param $description
-     * @param $photo_url
-     * @param $username
-     * @param $email
-     */
-    public function __construct($id, $description, $photo_url, $username)
+    
+    public function __construct($id, $title, $abstract, $username, $file_path, $status)
     {
         $this->id = $id;
-        $this->description = $description;
-        $this->photo_url = $photo_url;
+        $this->title = $title;
+        $this->abstract = $abstract;
         $this->username = $username;
+        $this->file_path = $file_path;
+        $this->status = $status;
     }
 
     /**

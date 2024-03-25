@@ -2,23 +2,26 @@
 include "menu.php";
 include 'connect.php';
 $loggedInUser = $_SESSION["username"];
+$loggedInUserRole = $_SESSION["role"];
+if($loggedInUserRole =="admin"){
 // get data from
-$story_id = FILTER_INPUT(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+$thesis_id = FILTER_INPUT(INPUT_GET, 'thesis_id', FILTER_SANITIZE_STRING);
 // get story details
-$sql = "select * from story where id = ?";
+$sql = "select * from thesis where id = ?";
 $stmt = $dbh->prepare($sql);
 // set value to query
-$params = [$story_id];
+$params = [$thesis_id];
 $result = $stmt->execute($params);
 if ($stmt->rowCount()) {
     // if query return any row
     while ($row = $stmt->fetch()) {
         $id = $row['id'];
-        $description = $row['description'];
-        $photo_url = $row["photo_url"];
+        $title = $row['title'];
+        $abstract = $row["abstract"];
+        $file_path = $row["file_path"];
 ?>
 
-<div style="margin-top: 8%" align="center">
+<!-- <div style="margin-top: 8%" align="center">
     <h3>Edit Story</h3><br/>
     <form method="POST" action="story_upload.php" enctype="multipart/form-data">
 
@@ -45,11 +48,28 @@ if ($stmt->rowCount()) {
         </table>
 
     </form>
-</div>
+</div> -->
+
+    <div style='width: 45% ; margin: auto; padding-left: 2%; padding-right: 2%; border: 1px solid gray' >
+        <h3>Edit Thesis</h3><br/>   
+        <div align="left"><br/>
+            <form method="POST" id="thesis_upload" name="thesis_upload" action="thesis_upload.php" enctype="multipart/form-data">
+                <input type="hidden" name="thesis_id" value="<?php echo $thesis_id; ?>" />
+                <label>Title : </label><input class="form-control" name="title" id="title"  value="<?php echo $title; ?>"required/><br/>
+                <label>Abstract : </label><textarea class="form-control" rows="4" name="abstract" style="width: 100%;" required ><?php echo $abstract; ?> </textarea><br/><br/>
+                <object data="<?php echo $file_path; ?>" type="application/pdf" width="100%" height="500px" ></object><br/><br/>
+                <input class="form-control" type="file" id="fileToUpload" name="fileToUpload"><br/><br/>
+                <button type="submit" class="btn btn-primary btn-block"  name="thesis_update" id="thesis_update" >Update</button> <br/><br/>
+            </form>
+        </div>
+        <hr/>
+    </div>
 
 
 <?php
-
     }
+    }
+}else{
+    echo "You are not allowed to edit thesis!";
 }
 ?>

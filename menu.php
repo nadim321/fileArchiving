@@ -35,6 +35,11 @@ if (isset($_SESSION["username"]) && isset($_SESSION["isLoggedIn"])) {
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
 
     <link rel="stylesheet" href="assets/css/lightbox.css">
+
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>    
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css">
 <!--
 
 TemplateMo 571 Hexashop
@@ -59,7 +64,7 @@ https://templatemo.com/tm-571-hexashop
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="index.php" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="thesis_list.php" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="user_list.php">User</a></li>
                             <li class="scroll-to-section"><a href="thesis_add.php">Doc Upload</a></li>
                             <li class="scroll-to-section"><a href="#kids">Upload request</a></li>
