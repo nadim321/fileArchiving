@@ -28,6 +28,9 @@ if (isset($_SESSION["username"]) && isset($_SESSION["isLoggedIn"])) {
     }
     ?>
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div style="display:flex;justify-content: center;">
+            <img style="height:150px;width:150px" src="image/logo.png">
+        </div><br/>
         <div class="panel panel-info" >
             <div class="panel-heading">
                 <div class="panel-title">Sign In</div>

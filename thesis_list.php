@@ -62,6 +62,8 @@ if ($stmt->rowCount()) {
     $str .= "</tbody></table></div>";
 
     echo $str;
+}else{
+    echo "<div width='100%' > No record found! </div>";
 }
 
 ?>

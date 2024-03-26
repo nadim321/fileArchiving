@@ -15,7 +15,6 @@ if(isset($_POST['thesis_upload'])) {
 
     $paramsok = false;
 // null check
-print "RRR";
     if (        
         $title !== null && $title !== "" && $abstract !== null && $abstract !== "" 
 

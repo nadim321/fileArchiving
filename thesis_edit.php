@@ -50,19 +50,30 @@ if ($stmt->rowCount()) {
     </form>
 </div> -->
 
-    <div style='width: 45% ; margin: auto; padding-left: 2%; padding-right: 2%; border: 1px solid gray' >
-        <h3>Edit Thesis</h3><br/>   
-        <div align="left"><br/>
-            <form method="POST" id="thesis_upload" name="thesis_upload" action="thesis_upload.php" enctype="multipart/form-data">
-                <input type="hidden" name="thesis_id" value="<?php echo $thesis_id; ?>" />
-                <label>Title : </label><input class="form-control" name="title" id="title"  value="<?php echo $title; ?>"required/><br/>
-                <label>Abstract : </label><textarea class="form-control" rows="4" name="abstract" style="width: 100%;" required ><?php echo $abstract; ?> </textarea><br/><br/>
-                <object data="<?php echo $file_path; ?>" type="application/pdf" width="100%" height="500px" ></object><br/><br/>
-                <input class="form-control" type="file" id="fileToUpload" name="fileToUpload"><br/><br/>
-                <button type="submit" class="btn btn-primary btn-block"  name="thesis_update" id="thesis_update" >Update</button> <br/><br/>
-            </form>
-        </div>
-        <hr/>
+
+    <link rel="stylesheet" href="css/add_page_style.css">
+
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items" style='width: 45% ; margin: auto; padding-left: 2%; padding-right: 2%; border: 1px solid gray' >
+                        <h3>Edit Thesis</h3><br/>   
+                        <div align="left"><br/>
+                            <form method="POST" id="thesis_upload" name="thesis_upload" action="thesis_upload.php" enctype="multipart/form-data">
+                                <input type="hidden" name="thesis_id" value="<?php echo $thesis_id; ?>" />
+                                <label>Title : </label><input class="form-control" name="title" id="title"  value="<?php echo $title; ?>"required/><br/>
+                                <label>Abstract : </label><textarea class="form-control" rows="4" name="abstract" style="width: 100%;" required ><?php echo $abstract; ?> </textarea><br/><br/>
+                                <object data="<?php echo $file_path; ?>" type="application/pdf" width="100%" height="500px" ></object><br/><br/>
+                                <input class="form-control" type="file" id="fileToUpload" name="fileToUpload"><br/><br/>
+                                <button type="submit" class="btn btn-primary btn-block"  name="thesis_update" id="thesis_update" >Update</button> <br/><br/>
+                            </form>
+                        </div>
+                        <hr/>
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
     </div>
 
 

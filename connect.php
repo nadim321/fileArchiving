@@ -2,7 +2,7 @@
 try {
     // database credential and connect
     $dbh = new PDO(
-        "mysql:host=localhost;dbname=gotravel",
+        "mysql:host=localhost;dbname=file_archiving",
         "root",
         ""
     );

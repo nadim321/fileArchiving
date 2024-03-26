@@ -3,6 +3,7 @@ include "menu.php";
 include 'connect.php';
 $loggedInUser = $_SESSION["username"];
 $loggedInUserRole = $_SESSION["role"];
+if($loggedInUserRole=="admin"){
 ?>
 
 
@@ -23,7 +24,7 @@ $loggedInUserRole = $_SESSION["role"];
 
 <?php
 // query for get story for logged in user
-$sql = "SELECT * FROM thesis where status = 1 and deleted = 0 order by id asc";
+$sql = "SELECT * FROM thesis where status = 0 and deleted = 0 order by id asc";
 $stmt = $dbh->prepare($sql);
 $params = [$loggedInUser];
 $result = $stmt->execute($params);
@@ -33,9 +34,9 @@ if ($stmt->rowCount()) {
     $i=1;
     // show story table
     $str =  "<div align='center'> <table id='thesisList' class='table table-striped table-bordered' > <thead><tr><th>SL</th><th>Title</th><th>Abstract</th><th>File</th>";
-    if($loggedInUserRole=="admin"){
-        $str .= "<th>Edit</th><th>Delete</th>";
-    };
+    
+        $str .= "<th>Approve</th>";
+  
     $str .= "</tr></thead><tbody>";
     while ($row = $stmt->fetch()) {
         //make a list of data with each row
@@ -43,6 +44,7 @@ if ($stmt->rowCount()) {
         $title = $row["title"];
         $abstract = $row["abstract"];
         $file_path = $row["file_path"] ;
+        $status = $row["file_path"] ;
 
 
 
@@ -51,10 +53,8 @@ if ($stmt->rowCount()) {
         $str .= "<td>$title</td>";
         $str .= "<td>$abstract</td>";
         $str .= "<td><a href='$file_path' target='blank'/><i class='fa fa-download'></i></td>";
-        if($loggedInUserRole=="admin"){
-            $str .= "<td><a href='thesis_edit.php?thesis_id=$id'>Edit</a></td>";
-            $str .= "<td><div align='center'><i class='fa fa-times-circle' style='font-size: 13px ; color: red' onclick='deleteThesis($id)'></i></div></td>";
-        }
+        $str .= "<td><div align='center'><i class='fa fa-check' style='font-size: 13px ; color: green' onclick='approveThesis($id)'></i></div></td>";
+
         $str .= "</tr>";
         $i++;
 
@@ -65,7 +65,7 @@ if ($stmt->rowCount()) {
 }else{
     echo "<div width='100%' > No record found! </div>";
 }
-
+}
 ?>
 
   </body>
@@ -74,9 +74,9 @@ if ($stmt->rowCount()) {
 <script type="text/javascript">
 
     // delete story
-    function deleteThesis(id) {
-        if(window.confirm("Do you want to delete this thesis ???")) {
-            window.location.href = "thesis_delete.php?thesis_id=" + id;
+    function approveThesis(id) {
+        if(window.confirm("Do you want to approve this thesis ?")) {
+            window.location.href = "thesis_approve.php?thesis_id=" + id;
         }
     }
 </script>

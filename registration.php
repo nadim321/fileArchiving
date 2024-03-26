@@ -6,7 +6,10 @@
 <body>
 <div class="row">
     <div class="col-md-6 col-sm-12 col-lg-6 col-md-offset-3">
-        <div class="panel panel-primary">
+    <div style="display:flex;justify-content: center;">
+            <img style="height:150px;width:150px" src="image/logo.png">
+        </div><br/>   
+    <div class="panel panel-primary">
             <div class="panel-heading">Enter Your Details Here
             </div>
             <div class="panel-body">

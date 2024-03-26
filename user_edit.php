@@ -2,14 +2,54 @@
 include "menu.php";
 include 'connect.php';
 $loggedInUser = $_SESSION["username"];
+$loggedInUserRole = $_SESSION["role"];
 // get data from
 $username = FILTER_INPUT(INPUT_GET, 'username', FILTER_SANITIZE_STRING);
-$role = 'admin';
+
+if($loggedInUserRole =="admin"){
+    // echo $loggedInUserRole;
+    if(isset($_POST["user_edit"])) {
+        // get field value from form
+        $submittedUsername = FILTER_INPUT(INPUT_POST, 'submittedUsername', FILTER_SANITIZE_STRING);
+        $first_name = FILTER_INPUT(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
+        $last_name = FILTER_INPUT(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
+        $email = FILTER_INPUT(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+        $phone = FILTER_INPUT(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+        $role = FILTER_INPUT(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
+
+        // null check
+        if (
+            $first_name !== null && $first_name !== "" &&
+            $last_name !== null && $last_name !== "" &&
+            $email !== null && $email !== "" &&
+            $phone !== null && $phone !== "" &&
+            $role !== null && $role !== ""
+        
+        ) {
+
+            $sql = "update user set firstName=? , lastName=? , email=? , phone=?, role=? where username = ?";
+            $stmt = $dbh->prepare($sql);
+            // set value to query
+            $params = [$first_name, $last_name , $email, $phone, $role, $submittedUsername ];
+//           print_r($params);
+            $result = $stmt->execute($params);
+            // print_r( $result);
+            // if($result->)
+
+            header("location:user_list.php");
+        
+        }
+        
+     
+        
+
+    }
+
 // get story details
-$sql = "select * from user where username = ? and role != ?";
+$sql = "select * from user where username = ?";
 $stmt = $dbh->prepare($sql);
 // set value to query
-$params = [$username, $role];
+$params = [$username];
 $result = $stmt->execute($params);
 if ($stmt->rowCount()) {
     // if query return any row
@@ -17,42 +57,65 @@ if ($stmt->rowCount()) {
         $username = $row['username'];
         $firstName = $row['firstName'];
         $lastName = $row['lastName'];
-        $name = $firstName. " ". $lastName;
+        $email = $row['email'];
+        $phone = $row['phone'];
+        $role = $row['role'];
         $profile_pic = $row["profile_pic"];
+ 
 ?>
 
-<div style="margin-top: 8%" align="center">
-    <h3>Edit Story</h3><br/>
-    <form method="POST" action="story_upload.php" enctype="multipart/form-data">
+<link rel="stylesheet" href="css/add_page_style.css">
 
-        <table align="center">
-            <tr>
-                <td></td>
-                <td><input type="hidden" name="username" value="<?php echo $username; ?>" </td>
-            </tr>
-            <tr>
-                <td colspan="2"><img src ="<?php echo $profile_pic; ?>" width="250px" height="150px"/></td>
-            </tr>
-            <tr>
-                <td>Image</td>
-                <td>: <input type="file" name="fileToUpload"></td>
-            </tr>
-            <tr>
-                <td>Name :</td>
-                <td><textarea rows="3" cols="40" name="description" required><?php echo $name; ?></textarea></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td align="right"><input type="submit" name="story_update" value="Update"/></td>
-            </tr>
-        </table>
 
-    </form>
-</div>
+
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Edit User</h3>
+                        <form name="user_edit" action="user_edit.php" method="post" >
+                            <input type="hidden" id="submittedUsername" name="submittedUsername" class="form-control" required value="<?php echo $username; ?>" >    
+                            <div class="form-group">
+                                <label for="first_name">First Name *</label>
+                                <input id="first_name" name="first_name" class="form-control" type="text" required value="<?php echo $firstName; ?>">
+                                <span id="error_first_name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name">Last Name *</label>
+                                <input id="last_name" name="last_name" class="form-control" type="text" required value="<?php echo $lastName; ?>">
+                                <span id="error_last_name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input id="email" name="email" class="form-control" type="email" required value="<?php echo $email; ?>">
+                                <span id="error_email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="text" id="phone" name="phone" class="form-control" required value="<?php echo $phone; ?>">
+                                <span id="error_phone" class="text-danger"></span>
+                            </div>              
+                            <div class="form-group">
+                                <label for="role">Role *</label>
+                                    <select id="role" name="role">
+                                        <option value="user" <?php if($role=="user"){ echo "selected";} ?>>User</option>
+                                        <option value="admin"<?php if($role=="admin"){ echo "selected";} ?>>Admin</option>
+                                    </select>
+                                <span id="error_role" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" name="user_edit" id="user_edit">Save</button>
+                    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 <?php
-
+    }
     }
 }
 ?>
