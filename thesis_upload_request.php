@@ -26,7 +26,6 @@ if($loggedInUserRole=="admin"){
 // query for get story for logged in user
 $sql = "SELECT * FROM thesis where status = 0 and deleted = 0 order by id asc";
 $stmt = $dbh->prepare($sql);
-$params = [$loggedInUser];
 $result = $stmt->execute($params);
 
 // if query return any row show the story list

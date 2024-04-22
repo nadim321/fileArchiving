@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2024 at 04:18 PM
+-- Generation Time: Apr 22, 2024 at 06:24 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -58,6 +58,7 @@ INSERT INTO `thesis` (`id`, `title`, `abstract`, `file_path`, `status`, `usernam
 --
 
 CREATE TABLE `user` (
+  `Id` int(11) NOT NULL,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -73,15 +74,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`firstName`, `lastName`, `email`, `phone`, `username`, `password`, `profile_pic`, `role`, `deleted`) VALUES
-('AAA', 'BBB', 'aaa@gmail.com', '0554521454', 'aaa', '$2y$10$5DcHD39RJQIW9zQoG//ZnOCEwDRbEIdNj6U/1hQfWIPVCNpo0kt7.', 'profile_pic/1711461236.jpg', 'user', 0),
-('wewe', 'wer', 'wew@gmail.com', '01827090222', 'erte', '$2y$10$R/lpeo53jaseXa9YwUjnLecTlLW3dcM2DjvHhW8Lg4d6XHl1M9Yr2', 'profile_pic/1711380087.jpg', 'user', 0),
-('wer', 'wer', 'wer@gmail.com', '24242', 'gh', '$2y$10$Z16BCIdT/CdBn0U70Osk7udCG62ZEANAl9ZMckM/5gXPSxinxowRC', 'profile_pic/1711461550.jpg', 'user', 0),
-('sad', 'sad', 'nahidul.haque.31@gmail.com', '4545554', 'naddim', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1575647224.webp', 'user', 0),
-('Nahidul', 'Haque', 'nahid@gmail.com', '4545554', 'nahid', '$2y$10$XnSxGAS7QBLTaTSkz8sk1uTDbQMsJgE3O//nBWAPAf53ZYBslw8b2', 'profile_pic/1575644158.png', 'user', 0),
-('nadim', 'ff', 'wew@gmail.com', '01827090222', 'nnnn', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1710947652.png', 'user', 0),
-('Nadimul', 'Haque', 'nadim.hq321@gmail.com', '5544122', 'super_admin', '$2y$10$Z16BCIdT/CdBn0U70Osk7udCG62ZEANAl9ZMckM/5gXPSxinxowRC', 'profile_pic/1575645967.png', 'admin', 0),
-('a', 'b', 'aaa@gmail.com', '21333333', 'vvv', '$2y$10$UuLe29PROU7XNKSon5kw9.914tBIs98uezPmgGgTc8Bx4AcCzGMCy', 'profile_pic/1711461357.jpg', 'admin', 0);
+INSERT INTO `user` (`Id`, `firstName`, `lastName`, `email`, `phone`, `username`, `password`, `profile_pic`, `role`, `deleted`) VALUES
+(1, 'sad', 'sad', 'nahidul.haque.31@gmail.com', '4545554', 'nadim', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1575647224.webp', 'user', 0),
+(3, 'super', 'admin', 'super@gmail.com', '01827090222', 'super_admin', '$2y$10$ZpKdHZPUVHSJFk9zJFTppOefzEOb.DpagL4pMHSsjKNbSqFaVcj1K', 'profile_pic/1713803054.png', 'admin', 0);
 
 --
 -- Indexes for dumped tables
@@ -97,7 +92,7 @@ ALTER TABLE `thesis`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`username`),
+  ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
@@ -109,6 +104,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `thesis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

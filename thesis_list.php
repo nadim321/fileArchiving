@@ -25,8 +25,7 @@ $loggedInUserRole = $_SESSION["role"];
 // query for get story for logged in user
 $sql = "SELECT * FROM thesis where status = 1 and deleted = 0 order by id asc";
 $stmt = $dbh->prepare($sql);
-$params = [$loggedInUser];
-$result = $stmt->execute($params);
+$result = $stmt->execute();
 
 // if query return any row show the story list
 if ($stmt->rowCount()) {
