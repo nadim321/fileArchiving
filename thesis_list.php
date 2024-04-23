@@ -23,7 +23,7 @@ $loggedInUserRole = $_SESSION["role"];
 
 <?php
 // query for get story for logged in user
-$sql = "SELECT * FROM thesis where status = 1 and deleted = 0 order by id asc";
+$sql = "SELECT a.*, b.name as teacherName FROM thesis a left join teacher b on  a.teacher_id = b.id where a.status = 1 and a.deleted = 0 order by a.id asc";
 $stmt = $dbh->prepare($sql);
 $result = $stmt->execute();
 
@@ -31,7 +31,7 @@ $result = $stmt->execute();
 if ($stmt->rowCount()) {
     $i=1;
     // show story table
-    $str =  "<div align='center'> <table id='thesisList' class='table table-striped table-bordered' > <thead><tr><th>SL</th><th>Title</th><th>Abstract</th><th>File</th>";
+    $str =  "<div align='center'> <table id='thesisList' class='table table-striped table-bordered' > <thead><tr><th>SL</th><th>Title</th><th>Abstract</th><th>Supervisor</th><th>File</th>";
     if($loggedInUserRole=="admin"){
         $str .= "<th>Edit</th><th>Delete</th>";
     };
@@ -41,6 +41,7 @@ if ($stmt->rowCount()) {
         $id = $row["id"];
         $title = $row["title"];
         $abstract = $row["abstract"];
+        $teacherName = $row["teacherName"];
         $file_path = $row["file_path"] ;
 
 
@@ -49,6 +50,7 @@ if ($stmt->rowCount()) {
         $str .= "<td>$i</td>";
         $str .= "<td>$title</td>";
         $str .= "<td>$abstract</td>";
+        $str .= "<td>$teacherName</td>";
         $str .= "<td><a href='$file_path' target='blank'/><i class='fa fa-download'></i></td>";
         if($loggedInUserRole=="admin"){
             $str .= "<td><a href='thesis_edit.php?thesis_id=$id'>Edit</a></td>";

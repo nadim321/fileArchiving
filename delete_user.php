@@ -6,7 +6,7 @@ $role = $_SESSION["role"];
 
 if($role == "admin")
 {
-$thesis_id = FILTER_INPUT(INPUT_GET, 'user_id', FILTER_SANITIZE_STRING);
+$user_id = FILTER_INPUT(INPUT_GET, 'user_id', FILTER_SANITIZE_STRING);
     // query for delete user
         $sql = "update user set deleted = 1 where id = ?";
         $stmt = $dbh->prepare($sql);

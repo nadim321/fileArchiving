@@ -79,6 +79,17 @@ https://templatemo.com/tm-571-hexashop
                                 </li>
                             <?php } ?>
                             
+                            <?php 
+                            if($loggedInUserRole=="admin"){ ?>
+                                <li class="submenu">
+                                <a href="javascript:;">Teacher</a>
+                                <ul>
+                                    <li><a href="teacher_list.php">List</a></li>
+                                    <li><a href="teacher_add.php">Add</a></li>
+                                </ul>
+                                </li>
+                            <?php } ?>
+
                             <li class="scroll-to-section"><a href="thesis_add.php">Doc Upload</a></li>
                             <?php 
                             if($loggedInUserRole=="admin"){ ?>

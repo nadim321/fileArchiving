@@ -51,6 +51,28 @@ include "thesis.php";
                               <input class="form-control" type="file" id="fileToUpload" name="fileToUpload" placeholder="File" required>
                                <div class="invalid-feedback">Password field cannot be blank!</div>
                            </div>   <br/>
+
+
+                           <div class="col-md-12">
+                                <label>Supervisor</label>
+                                <select name="teacher" required>
+                                    <option value="">Select Teacher</option>
+                                    <?php
+                                        $sql = "SELECT * FROM teacher where deleted = 0 order by id asc";
+                                        $stmt = $dbh->prepare($sql);
+
+                                        $result = $stmt->execute();
+                                        print_r($result);
+                                        //loop
+                                        while ($row = $stmt->fetch()) {
+                                    ?>
+                                            <option value="<?php echo $row['id'];?>"><?php echo $row['name'];?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                    </select>
+                            </div>   <br/>
+
                             <div class="form-button mt-3">
                                 <button type="submit" class="btn btn-primary btn-block" name="thesis_upload" id="thesis_upload">Upload</button>
                             </div>

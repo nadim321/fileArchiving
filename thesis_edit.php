@@ -18,37 +18,10 @@ if ($stmt->rowCount()) {
         $id = $row['id'];
         $title = $row['title'];
         $abstract = $row["abstract"];
+        $teacherId = $row["teacher_id"];
         $file_path = $row["file_path"];
 ?>
 
-<!-- <div style="margin-top: 8%" align="center">
-    <h3>Edit Story</h3><br/>
-    <form method="POST" action="story_upload.php" enctype="multipart/form-data">
-
-        <table align="center">
-            <tr>
-                <td></td>
-                <td><input type="hidden" name="story_id" value="<?php echo $story_id; ?>" </td>
-            </tr>
-            <tr>
-                <td colspan="2"><img src ="<?php echo $photo_url; ?>" width="250px" height="150px"/></td>
-            </tr>
-            <tr>
-                <td>Image</td>
-                <td>: <input type="file" name="fileToUpload"></td>
-            </tr>
-            <tr>
-                <td>Description :</td>
-                <td><textarea rows="3" cols="40" name="description" required><?php echo $description; ?></textarea></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td align="right"><input type="submit" name="story_update" value="Update"/></td>
-            </tr>
-        </table>
-
-    </form>
-</div> -->
 
 
     <link rel="stylesheet" href="css/add_page_style.css">
@@ -64,6 +37,26 @@ if ($stmt->rowCount()) {
                                 <input type="hidden" name="thesis_id" value="<?php echo $thesis_id; ?>" />
                                 <label>Title : </label><input class="form-control" name="title" id="title"  value="<?php echo $title; ?>"required/><br/>
                                 <label>Abstract : </label><textarea class="form-control" rows="4" name="abstract" style="width: 100%;" required ><?php echo $abstract; ?> </textarea><br/><br/>
+                                <label>Supervisor : </label>
+                                <select name="teacher" required>
+                                    <option value="">Select Teacher</option>
+                                    <?php
+                                        $sql = "SELECT * FROM teacher where deleted = 0 order by id asc";
+                                        $stmt = $dbh->prepare($sql);
+
+                                        $result = $stmt->execute();
+                                        print_r($result);
+                                        //loop
+                                        while ($row = $stmt->fetch()) {
+                                    ?>
+                                            <option value="<?php echo $row['id'];?>" <?php  if($row['id'] == $teacherId ) { echo 'selected';} ?> ><?php echo $row['name'];?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                    </select> <br/> <br/>
+                                
+                                
+                                <br/>
                                 <object data="<?php echo $file_path; ?>" type="application/pdf" width="100%" height="500px" ></object><br/><br/>
                                 <input class="form-control" type="file" id="fileToUpload" name="fileToUpload"><br/><br/>
                                 <button type="submit" class="btn btn-primary btn-block"  name="thesis_update" id="thesis_update" >Update</button> <br/><br/>
