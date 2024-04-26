@@ -9,14 +9,15 @@ if(isset($_POST['thesis_upload'])) {
     // echo "RsdfRR";
 // get field value from form
     $title = FILTER_INPUT(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-    $abstract = FILTER_INPUT(INPUT_POST, 'abstract', FILTER_SANITIZE_STRING);
+    $abstract = FILTER_INPUT(INPUT_POST, 'abstract', FILTER_SANITIZE_STRING);    
+    $teacherId = FILTER_INPUT(INPUT_POST, 'teacher', FILTER_SANITIZE_STRING);
     $target_tmp = $_FILES["fileToUpload"]["tmp_name"];
     $status = 0;
 
     $paramsok = false;
 // null check
     if (        
-        $title !== null && $title !== "" && $abstract !== null && $abstract !== "" 
+        $title !== null && $title !== "" && $abstract !== null && $abstract !== ""  && $teacherId !== null && $teacherId !== ""
 
     ) {
         // image upload for story
@@ -50,6 +51,7 @@ if(isset($_POST['thesis_upload'])) {
                 }
 
                 $titleMatchigPercent = 0;
+                $abstractMatchigPercent = 0;
 
                 // query for get story for logged in user
                 $sql = "SELECT * FROM thesis where status = 1 and deleted = 0 order by id asc";
@@ -66,16 +68,24 @@ if(isset($_POST['thesis_upload'])) {
                         if($percent >= $titleMatchigPercent){
                             $titleMatchigPercent = $percent ;
                         }
+
+                        $oldAbstract = $row["abstract"]; 
+                        $similarity1 = similar_text($oldAbstract, $abstract, $percent1);
+                        if($percent1 >= $abstractMatchigPercent){
+                            $abstractMatchigPercent = $percent1 ;
+                        }
                     }
+
                 }
-                if($titleMatchigPercent > 50){
+                if($titleMatchigPercent > 50 || $abstractMatchigPercent > 50){
                     $paramsok = false;
-                }else{
+                }
+                else{
                     // query for new story upload
-                    $sql = "INSERT into thesis (title, abstract, username, file_path , status) VALUES (?,?,?,?,?)";
+                    $sql = "INSERT into thesis (title, abstract, teacher_id, username, file_path , status) VALUES (?,?,?,?,?,?)";
                     $stmt = $dbh->prepare($sql);
                     // set value to query
-                    $params = [$title, $abstract ,$username, $target_Path, $status];
+                    $params = [$title, $abstract ,$teacherId, $username, $target_Path, $status];
                     //           print_r($params);
                     $result = $stmt->execute($params);
                 }
@@ -96,6 +106,8 @@ if(isset($_POST['thesis_upload'])) {
         }
     } else if($titleMatchigPercent > 50){    
         echo "This title is $titleMatchigPercent % mathed with others<br>";
+    }else if($abstractMatchigPercent > 50){    
+        echo "This abstract is $abstractMatchigPercent % mathed with others<br>";
     }
     else {
         echo "<p>Something was wrong with your parameters!</p>";
