@@ -105,9 +105,9 @@ if(isset($_POST['thesis_upload'])) {
             echo "<p>Failed to upload thesis.</p>";
         }
     } else if($titleMatchigPercent > 50){    
-        echo "This title is $titleMatchigPercent % mathed with others<br>";
+        echo "This title is ".round($titleMatchigPercent,2)."% matched with others<br>";
     }else if($abstractMatchigPercent > 50){    
-        echo "This abstract is $abstractMatchigPercent % mathed with others<br>";
+        echo "This abstract is ".round($abstractMatchigPercent,2)."% matched with others<br>";
     }
     else {
         echo "<p>Something was wrong with your parameters!</p>";
