@@ -68,7 +68,7 @@ if ($stmt->rowCount()) {
     // delete story
     function deleteTeacher(id) {
         if(window.confirm("Do you want to delete the teacher ?")) {
-            window.location.href = "delete_teacher.php?teacher_id=" + id;
+            window.location.href = "teacher_delete.php?teacher_id=" + id;
         }
     }
 </script>
