@@ -23,7 +23,7 @@ $loggedInUserRole = $_SESSION["role"];
 
 <?php
 // query for get story for logged in user
-$sql = "SELECT a.*, b.name as teacherName FROM thesis a left join teacher b on  a.teacher_id = b.id where a.status = 1 and a.deleted = 0 order by a.id asc";
+$sql = "SELECT a.*, b.name as teacherName FROM thesis a left join teacher b on  a.teacher_id = b.id where a.status = 1 and a.deleted = 0 order by a.id desc";
 $stmt = $dbh->prepare($sql);
 $result = $stmt->execute();
 
