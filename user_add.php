@@ -139,6 +139,7 @@ include "user.php";
                         <label for="role">Role *</label>
                             <select id="role" name="role">
                                 <option value="user">User</option>
+                                <option value="teacher">Teacher</option>
                                 <option value="admin">Admin</option>
                             </select>
                         <span id="error_role" class="text-danger"></span>

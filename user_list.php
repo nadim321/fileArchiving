@@ -30,7 +30,7 @@ $result = $stmt->execute();
 if ($stmt->rowCount()) {
     $i=1;
     // show story table
-    echo "<div align='center'> <table id='userList'  class='table table-striped table-bordered'> <thead><tr><th>SL</th><th>Username</th><th>Name</th><th>Email</th><th style='text-align:left'>Phone</th><th>Image</th><th>Edit</th><th>Delete</th></tr></thead><tbody>";
+    echo "<div align='center'> <table id='userList'  class='table table-striped table-bordered'> <thead><tr><th>SL</th><th>Username</th><th>Name</th><th>Email</th><th style='text-align:left'>Phone</th><th>Role</th><th>Image</th><th>Edit</th><th>Delete</th></tr></thead><tbody>";
     while ($row = $stmt->fetch()) {
         //make a list of data with each row
         $id = $row["id"];
@@ -40,6 +40,7 @@ if ($stmt->rowCount()) {
         $lastName = $row["lastName"] ;
         $email = $row["email"] ;
         $phone = $row["phone"] ;
+        $role = $row["role"] ;
 
 
 
@@ -49,6 +50,7 @@ if ($stmt->rowCount()) {
         echo "<td>$firstName $lastName</td>";
         echo "<td>$email</td>";
         echo "<td style='text-align:left'>$phone</td>";
+        echo "<td>$role</td>";
         echo "<td><img src='$profile_pic' width='70px' height='50px'/></td>";
         echo "<td><a href='user_edit.php?username=$username'>Edit</a></td>";
         echo "<td><div align='center'><i class='fa fa-times-circle' style='font-size: 13px ; color: red' onclick='deleteUser($id)'></i></div></td>";

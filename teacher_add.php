@@ -13,23 +13,25 @@ include 'connect.php';
         $email = FILTER_INPUT(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
         $phone = FILTER_INPUT(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
         $designation = FILTER_INPUT(INPUT_POST, 'designation', FILTER_SANITIZE_STRING);
+        $user = FILTER_INPUT(INPUT_POST, 'user', FILTER_SANITIZE_STRING);
         
         $paramsok = false;
         // null check
         if (
             $name !== null && $name !== "" &&
             $email !== null && $email !== "" &&
-            $phone !== null && $phone !== "" &&
-            $designation !== null && $designation !== ""
+            $phone !== null && $phone !== "" && 
+            $designation !== null && $designation !== "" &&
+            $user !== null && $user !== ""
         
         ) {
                     // prepare query for insert data
                     $paramsok = true;
-                    $sql = "INSERT into teacher (`name`,email,phone,designation,deleted) VALUES (?,?,?,?,?)";
+                    $sql = "INSERT into teacher (`name`,email,phone,designation,user,deleted) VALUES (?,?,?,?,?,?)";
                     $stmt = $dbh->prepare($sql);
                     // set value to query
-                    $params = [$name,$email,$phone,$designation,0];
-                  print_r($params);
+                    $params = [$name,$email,$phone,$designation,$user,0];
+                    print_r($params);
                     $result = $stmt->execute($params);
         
         }
@@ -60,7 +62,7 @@ include 'connect.php';
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>Add User</h3>
+                        <h3>Add Teacher</h3>
                         <form name="myform"  method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name">Name *</label>
@@ -82,6 +84,27 @@ include 'connect.php';
                         <input type="text" id="designation" name="designation" class="form-control" required>
                         <span id="error_designation" class="text-danger"></span>
                     </div> 
+
+                    <div  class="form-group">
+                                <label>User</label>
+                                <select name="user" required>
+                                    <option value="">Select User</option>
+                                    <?php
+                                        $sql = "SELECT * FROM user where deleted = 0 and role='teacher' order by id asc";
+                                        $stmt = $dbh->prepare($sql);
+
+                                        $result = $stmt->execute();
+                                        print_r($result);
+                                        //loop
+                                        while ($row = $stmt->fetch()) {
+                                    ?>
+                                            <option value="<?php echo $row['username'];?>"><?php echo $row['username'];?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                    </select>
+                    </div>   <br/>
+
                     <button type="submit" class="btn btn-primary btn-block" name="teacher_add" id="teacher_add">Save</button>
                     
                 </form>

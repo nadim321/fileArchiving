@@ -40,9 +40,9 @@ if (isset($_SESSION["username"]) && isset($_SESSION["isLoggedIn"])) {
     <link rel="stylesheet" href="assets/css/lightbox.css">
 
     
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>    
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css">
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/dataTables.js"></script>    
+    <link rel="stylesheet" href="css/dataTables.dataTables.css">
 <!--
 
 TemplateMo 571 Hexashop
@@ -89,8 +89,10 @@ https://templatemo.com/tm-571-hexashop
                                 </ul>
                                 </li>
                             <?php } ?>
-
+                            <?php 
+                            if($loggedInUserRole=="user"){ ?>
                             <li class="scroll-to-section"><a href="thesis_add.php">Doc Upload</a></li>
+                            <?php } ?>
                             <?php 
                             if($loggedInUserRole=="admin"){ ?>
                             <li class="scroll-to-section"><a href="thesis_upload_request.php">Upload request</a></li>

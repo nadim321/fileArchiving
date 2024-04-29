@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2024 at 07:50 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.31
+-- Generation Time: Apr 29, 2024 at 07:33 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,6 +33,7 @@ CREATE TABLE `teacher` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `designation` varchar(255) NOT NULL,
+  `user` varchar(255) NOT NULL,
   `deleted` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -40,9 +41,10 @@ CREATE TABLE `teacher` (
 -- Dumping data for table `teacher`
 --
 
-INSERT INTO `teacher` (`id`, `name`, `email`, `phone`, `designation`, `deleted`) VALUES
-(1, 'Piash1111', 'aaa@gmail.com', '2133122312312', 'Professor', 0),
-(2, 'Abc', 'wew@gmail.com', '0554521454', 'Professor', 0);
+INSERT INTO `teacher` (`id`, `name`, `email`, `phone`, `designation`, `user`, `deleted`) VALUES
+(1, 'Piash1111', 'aaa@gmail.com', '2133122312312', 'Professor', '', 0),
+(2, 'Abc', 'wew@gmail.com', '0554521454', 'Professor', '', 0),
+(4, 'Raa Raa', 'raa@gmail.com', '2155545', 'Prof', 'raa', 0);
 
 -- --------------------------------------------------------
 
@@ -74,7 +76,10 @@ INSERT INTO `thesis` (`id`, `title`, `abstract`, `file_path`, `teacher_id`, `sta
 (7, 'Heart disease Management System', 'Heart disease describes a range of conditions that affect the heart. Heart diseases include: Blood vessel disease, such as coronary artery disease. Irregular heartbeats (arrhythmias) Heart problems you&#39;re born with (congenital heart defects)', 'thesis_doc/1711379021.pdf', 2, 1, 'nadim', 0),
 (8, 'Papaya leaf diseases', 'Brown spot is a serious foliar disease found in most papaya producing countries. Symptoms of brown spot include light brown circular spots on leaves (Figure 1), ...', 'thesis_doc/1711379274.pdf', 2, 1, 'naddim', 1),
 (9, 'How to embed PDF viewer in HTML', 'Unfortunately, it is not possible to completely prevent a user from downloading a PDF file that is embedded in an HTML page. Even if you disable the right-click context menu, a user can still access the PDF file through the browser&#39;s developer tools or by inspecting the page source.\r\n\r\nHowever, you can make it more difficult for a user to download the PDF file by u', 'thesis_doc/1711385718.pdf', 2, 1, 'nadim', 0),
-(10, 'rr', 'rr', 'thesis_doc/1713893967.jpg', 2, 1, 'super_admin', 0);
+(10, 'rr', 'rr', 'thesis_doc/1713893967.jpg', 2, 1, 'super_admin', 0),
+(11, 'A system for managing cardiovascular disease', 'wefferwe4534', 'thesis_doc/1713936350.png', 0, 1, 'super_admin', 0),
+(12, 'A platform designed to oversee the management of heart conditions.', 'wefferwe4534', 'thesis_doc/1713936390.png', 0, 1, 'super_admin', 0),
+(13, 'Usdufssfs', 'fdgertererw', 'thesis_doc/1714368748.PNG', 4, 1, 'nadim', 0);
 
 -- --------------------------------------------------------
 
@@ -101,7 +106,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `firstName`, `lastName`, `email`, `phone`, `username`, `password`, `profile_pic`, `role`, `deleted`) VALUES
 (1, 'sad', 'sad', 'nahidul.haque.31@gmail.com', '4545554', 'nadim', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1575647224.webp', 'user', 0),
-(3, 'super', 'admin', 'super@gmail.com', '01827090222', 'super_admin', '$2y$10$ZpKdHZPUVHSJFk9zJFTppOefzEOb.DpagL4pMHSsjKNbSqFaVcj1K', 'profile_pic/1713803054.png', 'admin', 0);
+(3, 'super', 'admin', 'super@gmail.com', '01827090222', 'super_admin', '$2y$10$ZpKdHZPUVHSJFk9zJFTppOefzEOb.DpagL4pMHSsjKNbSqFaVcj1K', 'profile_pic/1713803054.png', 'admin', 0),
+(4, 'Raa', 'Raa', 'raa@gmail.com', '0215002115', 'raa', '$2y$10$MU9ZGRg5P/aGottqYvFEOeZJBz.8UwnNWvgb1m1SG79IDTM8qe8uO', 'profile_pic/1714367556.PNG', 'teacher', 0);
 
 --
 -- Indexes for dumped tables
@@ -134,19 +140,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `thesis`
 --
 ALTER TABLE `thesis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
