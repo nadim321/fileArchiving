@@ -12,7 +12,17 @@ if (isset($_SESSION["username"]) && isset($_SESSION["isLoggedIn"])) {
 <link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .field-icon {
+    float: right;
+    margin-left: -25px;
+    margin-top: 10px;
+    position: relative;
+    z-index: 2;
+    }
 
+</style>
 
 
 <div class="container">
@@ -38,19 +48,28 @@ if (isset($_SESSION["username"]) && isset($_SESSION["isLoggedIn"])) {
 
             <div style="padding-top:30px" class="panel-body" >
 
-                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                <?php
+                        $isErr = FILTER_INPUT(INPUT_GET, 'err', FILTER_SANITIZE_STRING);
+                        if($isErr == 1){
+                           echo "<div  id='login-alert' class='alert alert-danger col-sm-12'>Bad Credential!</div>";
+                        }
+                    ?>
+            
 
                 <form id="loginform" class="form-horizontal" role="form" method="POST" action="loginCheck.php" >
 
                     <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
                         <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username">
                     </div>
 
                     <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input id="login-password" type="password" class="form-control" name="password" placeholder="password"/>
+                        <span toggle="#login-password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                     </div>
+
+                    
 
                     <div style="margin-top:10px" class="form-group">
                         <!-- Button -->
@@ -81,3 +100,16 @@ if (isset($_SESSION["username"]) && isset($_SESSION["isLoggedIn"])) {
 
 
 </div>
+
+<script>
+    $(".toggle-password").click(function() {
+
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+    input.attr("type", "text");
+    } else {
+    input.attr("type", "password");
+    }
+    });
+</script>

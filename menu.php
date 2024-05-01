@@ -90,13 +90,14 @@ https://templatemo.com/tm-571-hexashop
                                 </li>
                             <?php } ?>
                             <?php 
-                            if($loggedInUserRole=="user"){ ?>
+                            if($loggedInUserRole=="user" || $loggedInUserRole=="admin"){ ?>
                             <li class="scroll-to-section"><a href="thesis_add.php">Doc Upload</a></li>
                             <?php } ?>
                             <?php 
                             if($loggedInUserRole=="admin"){ ?>
                             <li class="scroll-to-section"><a href="thesis_upload_request.php">Upload request</a></li>
                             <?php } ?>
+                            <li style="float: right"><a href="change_pass.php">Change Password</a></li>
                             <li style="float: right"><a href="logout.php">Logout</a></li>
                         </ul>        
                         <a class='menu-trigger'>

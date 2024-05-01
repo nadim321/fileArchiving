@@ -28,7 +28,7 @@ if ($paramsok) {
 
                 header("location: thesis_list.php");
             }else {
-                header("location: login.php");
+                header("location: login.php?err=1");
             }
         }
 
