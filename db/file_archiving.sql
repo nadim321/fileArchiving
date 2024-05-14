@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2024 at 07:33 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: May 14, 2024 at 07:48 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `file_archiving`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `user` varchar(255) NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`id`, `name`, `email`, `phone`, `user`, `deleted`) VALUES
+(1, 'rr rr', 'rr@gmail.coom', '021545451', 'rrr', 0);
 
 -- --------------------------------------------------------
 
@@ -42,9 +64,30 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`id`, `name`, `email`, `phone`, `designation`, `user`, `deleted`) VALUES
-(1, 'Piash1111', 'aaa@gmail.com', '2133122312312', 'Professor', '', 0),
-(2, 'Abc', 'wew@gmail.com', '0554521454', 'Professor', '', 0),
-(4, 'Raa Raa', 'raa@gmail.com', '2155545', 'Prof', 'raa', 0);
+(1, 'Piash1111', 'aaa@gmail.com', '2133122312312', 'Professor', 'c', 0),
+(2, 'Abc', 'wew@gmail.com', '0554521454', 'Professor', 'b', 0),
+(4, 'Raa Raa', 'raa@gmail.com', '2155545', 'Prof', 'a', 0),
+(5, 'Teacher 1', 'teacher1@gmail.com', '018270902222', 'Professorsdfsd', 'raa', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher_student_mapping`
+--
+
+CREATE TABLE `teacher_student_mapping` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `teacher_student_mapping`
+--
+
+INSERT INTO `teacher_student_mapping` (`id`, `student_id`, `teacher_id`, `deleted`) VALUES
+(1, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -107,16 +150,31 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `firstName`, `lastName`, `email`, `phone`, `username`, `password`, `profile_pic`, `role`, `deleted`) VALUES
 (1, 'sad', 'sad', 'nahidul.haque.31@gmail.com', '4545554', 'nadim', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1575647224.webp', 'student', 0),
 (3, 'super', 'admin', 'super@gmail.com', '01827090222', 'super_admin', '$2y$10$ZpKdHZPUVHSJFk9zJFTppOefzEOb.DpagL4pMHSsjKNbSqFaVcj1K', 'profile_pic/1713803054.png', 'admin', 0),
-(4, 'Raa', 'Raa', 'raa@gmail.com', '0215002115', 'raa', '$2y$10$MU9ZGRg5P/aGottqYvFEOeZJBz.8UwnNWvgb1m1SG79IDTM8qe8uO', 'profile_pic/1714367556.PNG', 'teacher', 0);
+(4, 'Raa', 'Raa', 'raa@gmail.com', '0215002115', 'raa', '$2y$10$MU9ZGRg5P/aGottqYvFEOeZJBz.8UwnNWvgb1m1SG79IDTM8qe8uO', 'profile_pic/1714367556.PNG', 'teacher', 0),
+(5, 'rr', 'rr', 'rr@gmail.coom', '021545451', 'rrr', '$2y$10$szCLF/TjeoDKlPMBGWZLSOGSt7UohKONEU5Lzu.KIs4XslSI9Gmee', 'profile_pic/1715705930.jpg', 'student', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user` (`user`);
+
+--
 -- Indexes for table `teacher`
 --
 ALTER TABLE `teacher`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user` (`user`);
+
+--
+-- Indexes for table `teacher_student_mapping`
+--
+ALTER TABLE `teacher_student_mapping`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -137,10 +195,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `teacher_student_mapping`
+--
+ALTER TABLE `teacher_student_mapping`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `thesis`
@@ -152,7 +222,7 @@ ALTER TABLE `thesis`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
