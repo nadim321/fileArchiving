@@ -31,7 +31,7 @@ if (
     $target_file = $target_dir . $newfilename;
     $target_Path = "profile_pic/" . $newfilename;
     $uploadOk = 1;
-    $role="user";
+    $role="student";
 
 
 // Check if image file is a actual image or fake image
@@ -49,13 +49,22 @@ if (
     } else {
         if (move_uploaded_file($target_tmp, $target_file)) {
             // prepare query for insert data
-            $paramsok = true;
+            
             $sql = "INSERT into user (firstName,lastName,email,phone,username,password,profile_pic,role) VALUES (?,?,?,?,?,?,?,?)";
             $stmt = $dbh->prepare($sql);
             // set value to query
             $params = [$first_name,$last_name,$email,$phone,$username,$pwd,$target_Path,$role];
 //           print_r($params);
             $result = $stmt->execute($params);
+
+            $sql = "INSERT into student (name,email,phone,user,deleted) VALUES (?,?,?,?,?)";
+            $stmt = $dbh->prepare($sql);
+            // set value to query
+            $params = [$first_name.' '.$last_name,$email,$phone,$username,0];
+//           print_r($params);
+            $result = $stmt->execute($params);
+
+            $paramsok = true;
         } else {
             echo "Sorry, there was an error uploading your file<br>";
         }

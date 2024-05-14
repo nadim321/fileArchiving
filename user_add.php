@@ -138,7 +138,7 @@ include "user.php";
                     <div class="form-group">
                         <label for="role">Role *</label>
                             <select id="role" name="role">
-                                <option value="user">User</option>
+                                <option value="student">Student</option>
                                 <option value="teacher">Teacher</option>
                                 <option value="admin">Admin</option>
                             </select>

@@ -105,7 +105,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `firstName`, `lastName`, `email`, `phone`, `username`, `password`, `profile_pic`, `role`, `deleted`) VALUES
-(1, 'sad', 'sad', 'nahidul.haque.31@gmail.com', '4545554', 'nadim', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1575647224.webp', 'user', 0),
+(1, 'sad', 'sad', 'nahidul.haque.31@gmail.com', '4545554', 'nadim', '$2y$10$PuhQOAGm2l4dt31WaQndJe16/K7LyM1GxMyM4sHS7BEjFGsJZ/eAq', 'profile_pic/1575647224.webp', 'student', 0),
 (3, 'super', 'admin', 'super@gmail.com', '01827090222', 'super_admin', '$2y$10$ZpKdHZPUVHSJFk9zJFTppOefzEOb.DpagL4pMHSsjKNbSqFaVcj1K', 'profile_pic/1713803054.png', 'admin', 0),
 (4, 'Raa', 'Raa', 'raa@gmail.com', '0215002115', 'raa', '$2y$10$MU9ZGRg5P/aGottqYvFEOeZJBz.8UwnNWvgb1m1SG79IDTM8qe8uO', 'profile_pic/1714367556.PNG', 'teacher', 0);
 

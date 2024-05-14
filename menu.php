@@ -90,12 +90,16 @@ https://templatemo.com/tm-571-hexashop
                                 </li>
                             <?php } ?>
                             <?php 
-                            if($loggedInUserRole=="user" || $loggedInUserRole=="admin"){ ?>
+                            if($loggedInUserRole=="student" || $loggedInUserRole=="admin"){ ?>
                             <li class="scroll-to-section"><a href="thesis_add.php">Doc Upload</a></li>
                             <?php } ?>
                             <?php 
                             if($loggedInUserRole=="admin"){ ?>
                             <li class="scroll-to-section"><a href="thesis_upload_request.php">Upload request</a></li>
+                            <?php } ?>
+                            <?php 
+                            if($loggedInUserRole=="admin"){ ?>
+                            <li class="scroll-to-section"><a href="teacher_student_mapping_add.php">Student Assign </a></li>
                             <?php } ?>
                             <li style="float: right"><a href="change_pass.php">Change Password</a></li>
                             <li style="float: right"><a href="logout.php">Logout</a></li>

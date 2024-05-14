@@ -99,7 +99,7 @@ if ($stmt->rowCount()) {
                             <div class="form-group">
                                 <label for="role">Role *</label>
                                     <select id="role" name="role">
-                                        <option value="user" <?php if($role=="user"){ echo "selected";} ?>>User</option>
+                                        <option value="student" <?php if($role=="student"){ echo "selected";} ?>>User</option>
                                         <option value="admin"<?php if($role=="admin"){ echo "selected";} ?>>Admin</option>
                                     </select>
                                 <span id="error_role" class="text-danger"></span>
