@@ -24,7 +24,7 @@ include 'connect.php';
                     $sql = "INSERT into teacher_student_mapping (student_id,teacher_id) VALUES (?,?)";
                     $stmt = $dbh->prepare($sql);
                     // set value to query
-                    $params = [$teacherId,$studentId];
+                    $params = [$studentId,$teacherId];
                     // print_r($params);
                     $result = $stmt->execute($params);
         

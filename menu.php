@@ -97,9 +97,16 @@ https://templatemo.com/tm-571-hexashop
                             if($loggedInUserRole=="admin"){ ?>
                             <li class="scroll-to-section"><a href="thesis_upload_request.php">Upload request</a></li>
                             <?php } ?>
+
                             <?php 
                             if($loggedInUserRole=="admin"){ ?>
-                            <li class="scroll-to-section"><a href="teacher_student_mapping_add.php">Student Assign </a></li>
+                                <li class="submenu">
+                                <a href="javascript:;">Student Assign</a>
+                                <ul>
+                                    <li><a href="teacher_student_mapping_list.php">List</a></li>
+                                    <li><a href="teacher_student_mapping_add.php">Add</a></li>
+                                </ul>
+                                </li>
                             <?php } ?>
                             <li style="float: right"><a href="change_pass.php">Change Password</a></li>
                             <li style="float: right"><a href="logout.php">Logout</a></li>
