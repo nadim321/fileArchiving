@@ -54,11 +54,31 @@ include "thesis.php";
 
 
                            <div class="col-md-12">
-                                <label>Supervisor</label>
+                                <label>Supervisor *</label>
                                 <select name="teacher" required>
                                     <option value="">Select Teacher</option>
                                     <?php
                                         $sql = "SELECT * FROM teacher where deleted = 0 order by id asc";
+                                        $stmt = $dbh->prepare($sql);
+
+                                        $result = $stmt->execute();
+                                        print_r($result);
+                                        //loop
+                                        while ($row = $stmt->fetch()) {
+                                    ?>
+                                            <option value="<?php echo $row['id'];?>"><?php echo $row['name'];?></option>
+                                    <?php
+                                        }
+                                    ?>
+                                    </select>
+                            </div>   <br/>
+
+                            <div class="col-md-12">
+                                <label>Category *</label>
+                                <select name="category" required>
+                                    <option value="">Select Category</option>
+                                    <?php
+                                        $sql = "SELECT * FROM category where deleted = 0 order by id asc";
                                         $stmt = $dbh->prepare($sql);
 
                                         $result = $stmt->execute();

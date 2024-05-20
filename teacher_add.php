@@ -31,7 +31,7 @@ include 'connect.php';
                     $stmt = $dbh->prepare($sql);
                     // set value to query
                     $params = [$name,$email,$phone,$designation,$user,0];
-                    print_r($params);
+                    // print_r($params);
                     $result = $stmt->execute($params);
         
         }

@@ -89,13 +89,20 @@ https://templatemo.com/tm-571-hexashop
                                 </ul>
                                 </li>
                             <?php } ?>
+
+
                             <?php 
                             if($loggedInUserRole=="student" || $loggedInUserRole=="admin"){ ?>
-                            <li class="scroll-to-section"><a href="thesis_add.php">Doc Upload</a></li>
-                            <?php } ?>
-                            <?php 
-                            if($loggedInUserRole=="admin"){ ?>
-                            <li class="scroll-to-section"><a href="thesis_upload_request.php">Upload request</a></li>
+                                <li class="submenu">
+                                <a href="javascript:;">Upload</a>
+                                <ul>
+                                    <li><a href="thesis_add.php">Doc Upload</a></li>
+                                    <?php 
+                                    if($loggedInUserRole=="admin"){ ?>
+                                        <li><a href="thesis_upload_request.php">Upload request</a></li>
+                                    <?php } ?>
+                                </ul>
+                                </li>
                             <?php } ?>
 
                             <?php 
@@ -105,6 +112,16 @@ https://templatemo.com/tm-571-hexashop
                                 <ul>
                                     <li><a href="teacher_student_mapping_list.php">List</a></li>
                                     <li><a href="teacher_student_mapping_add.php">Add</a></li>
+                                </ul>
+                                </li>
+                            <?php } ?>
+                            <?php 
+                            if($loggedInUserRole=="admin"){ ?>
+                                <li class="submenu">
+                                <a href="javascript:;">Category</a>
+                                <ul>
+                                    <li><a href="category_list.php">List</a></li>
+                                    <li><a href="category_add.php">Add</a></li>
                                 </ul>
                                 </li>
                             <?php } ?>

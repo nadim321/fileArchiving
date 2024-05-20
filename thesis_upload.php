@@ -11,13 +11,14 @@ if(isset($_POST['thesis_upload'])) {
     $title = FILTER_INPUT(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
     $abstract = FILTER_INPUT(INPUT_POST, 'abstract', FILTER_SANITIZE_STRING);    
     $teacherId = FILTER_INPUT(INPUT_POST, 'teacher', FILTER_SANITIZE_STRING);
+    $categoryId = FILTER_INPUT(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
     $target_tmp = $_FILES["fileToUpload"]["tmp_name"];
     $status = 0;
 
     $paramsok = false;
 // null check
     if (        
-        $title !== null && $title !== "" && $abstract !== null && $abstract !== ""  && $teacherId !== null && $teacherId !== ""
+        $title !== null && $title !== "" && $abstract !== null && $abstract !== ""  && $teacherId !== null && $teacherId !== "" && $categoryId !== null && $categoryId !== ""
 
     ) {
         // image upload for story
@@ -82,10 +83,10 @@ if(isset($_POST['thesis_upload'])) {
                 }
                 else{
                     // query for new story upload
-                    $sql = "INSERT into thesis (title, abstract, teacher_id, username, file_path , status) VALUES (?,?,?,?,?,?)";
+                    $sql = "INSERT into thesis (title, abstract, teacher_id, username, file_path , status, category_id) VALUES (?,?,?,?,?,?,?)";
                     $stmt = $dbh->prepare($sql);
                     // set value to query
-                    $params = [$title, $abstract ,$teacherId, $username, $target_Path, $status];
+                    $params = [$title, $abstract ,$teacherId, $username, $target_Path, $status, $categoryId];
                     //           print_r($params);
                     $result = $stmt->execute($params);
                 }

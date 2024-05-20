@@ -23,7 +23,7 @@ include 'connect.php';
                     $stmt = $dbh->prepare($sql);
                     // set value to query
                     $params = [$name,0];
-                    print_r($params);
+                    // print_r($params);
                     $result = $stmt->execute($params);
         
         }
@@ -54,50 +54,14 @@ include 'connect.php';
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>Add Teacher</h3>
-                        <form name="myform"  method="post" enctype="multipart/form-data">
+                        <h3>Add Catregory</h3>
+                        <form name="category_add"  method="post" >
                     <div class="form-group">
                         <label for="name">Name *</label>
                         <input id="name" name="name" class="form-control" type="text" required>
                         <span id="error_name" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input id="email" name="email" class="form-control" type="email" required>
-                        <span id="error_email" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number *</label>
-                        <input type="text" id="phone" name="phone" class="form-control" required>
-                        <span id="error_phone" class="text-danger"></span>
-                    </div> 
-                    <div class="form-group">
-                        <label for="designation">Designation *</label>
-                        <input type="text" id="designation" name="designation" class="form-control" required>
-                        <span id="error_designation" class="text-danger"></span>
-                    </div> 
-
-                    <div  class="form-group">
-                                <label>User</label>
-                                <select name="user" required>
-                                    <option value="">Select User</option>
-                                    <?php
-                                        $sql = "SELECT * FROM user where deleted = 0 and role='teacher' order by id asc";
-                                        $stmt = $dbh->prepare($sql);
-
-                                        $result = $stmt->execute();
-                                        print_r($result);
-                                        //loop
-                                        while ($row = $stmt->fetch()) {
-                                    ?>
-                                            <option value="<?php echo $row['username'];?>"><?php echo $row['username'];?></option>
-                                    <?php
-                                        }
-                                    ?>
-                                    </select>
-                    </div>   <br/>
-
-                    <button type="submit" class="btn btn-primary btn-block" name="teacher_add" id="teacher_add">Save</button>
+                    <button type="submit" class="btn btn-primary btn-block" name="category_add" id="category_add">Save</button>
                     
                 </form>
                     </div>

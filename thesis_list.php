@@ -24,12 +24,18 @@ $loggedInUserRole = $_SESSION["role"];
 <?php
 // query for get story for logged in user
 if($loggedInUserRole=="teacher"){
-    $sql = "SELECT a.*, b.name as teacherName FROM thesis a left join teacher b on  a.teacher_id = b.id where a.status = 1 and a.deleted = 0 and b.user = ? order by a.id desc";
+    $sql = "SELECT a.*, b.name as teacherName, c.name as categoryName FROM thesis a 
+        left join teacher b on  a.teacher_id = b.id 
+        LEFT JOIN category c on a.category_id = c.id
+        where a.status = 1 and a.deleted = 0 and c.deleted=0 and b.user = ? order by a.id desc";
     $stmt = $dbh->prepare($sql);
     $params = [$loggedInUser];
     $result = $stmt->execute($params);
 }else{
-    $sql = "SELECT a.*, b.name as teacherName FROM thesis a left join teacher b on  a.teacher_id = b.id where a.status = 1 and a.deleted = 0 order by a.id desc";
+    $sql = "SELECT a.*, b.name as teacherName, c.name as categoryName FROM thesis a 
+        left join teacher b on  a.teacher_id = b.id 
+        left join category c on a.category_id = c.id                                 
+        where a.status = 1 and a.deleted = 0 and c.deleted = 0 order by a.id desc";
     $stmt = $dbh->prepare($sql);
     $result = $stmt->execute();
 }
@@ -38,7 +44,7 @@ if($loggedInUserRole=="teacher"){
 if ($stmt->rowCount()) {
     $i=1;
     // show story table
-    $str =  "<div align='center'> <table id='thesisList' class='table table-striped table-bordered' > <thead><tr><th>SL</th><th>Title</th><th>Abstract</th><th>Supervisor</th><th>File</th>";
+    $str =  "<div align='center'> <table id='thesisList' class='table table-striped table-bordered' > <thead><tr><th>SL</th><th>Title</th><th>Abstract</th><th>Supervisor</th><th>Category</th><th>File</th>";
     if($loggedInUserRole=="admin"){
         $str .= "<th>Edit</th><th>Delete</th>";
     };
@@ -50,6 +56,7 @@ if ($stmt->rowCount()) {
         $abstract = $row["abstract"];
         $teacherName = $row["teacherName"];
         $file_path = $row["file_path"] ;
+        $categoryName = $row["categoryName"] ;
 
 
 
@@ -58,6 +65,7 @@ if ($stmt->rowCount()) {
         $str .= "<td>$title</td>";
         $str .= "<td>$abstract</td>";
         $str .= "<td>$teacherName</td>";
+        $str .= "<td>$categoryName</td>";
         $str .= "<td><a href='$file_path' target='blank'/><i class='fa fa-download'></i></td>";
         if($loggedInUserRole=="admin"){
             $str .= "<td><a href='thesis_edit.php?thesis_id=$id'>Edit</a></td>";
