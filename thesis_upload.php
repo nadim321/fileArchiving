@@ -126,7 +126,7 @@ if(isset($_POST['thesis_update'])) {
         $teacherId = FILTER_INPUT(INPUT_POST, 'teacher', FILTER_SANITIZE_STRING);
 
         $deadline = "";
-        if($role == 'teacher'){  
+        if($role == 'admin' || $role == 'teacher'){  
             $deadline = FILTER_INPUT(INPUT_POST, 'deadline', FILTER_SANITIZE_STRING);
         }
 
@@ -209,7 +209,7 @@ if(isset($_POST['thesis_update'])) {
                 } else {
                     $paramsok = true;
     
-                    if($role == 'teacher'){
+                    if($role == 'admin' || $role == 'teacher'){
                         $sql = "update thesis set title=?, abstract=?, teacher_id=?, deadline=?  where id = ?";
                         $stmt = $dbh->prepare($sql);
                         // set value to query

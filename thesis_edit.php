@@ -20,6 +20,7 @@ if ($stmt->rowCount()) {
         $abstract = $row["abstract"];
         $teacherId = $row["teacher_id"];
         $file_path = $row["file_path"];
+        $deadline = $row["deadline"];
 ?>
 
 
@@ -59,8 +60,8 @@ if ($stmt->rowCount()) {
                                 <br/>
                                 <object data="<?php echo $file_path; ?>" type="application/pdf" width="100%" height="500px" ></object><br/><br/>
                                 <input class="form-control" type="file" id="fileToUpload" name="fileToUpload"><br/><br/>
-                                <?php if($loggedInUserRole == 'teacher'){ ?>
-                                    <input class="form-control" type="date" id="deadline" name="deadline"><br/><br/>
+                                <?php if($loggedInUserRole == 'admin' || $loggedInUserRole == 'teacher'){ ?>
+                                    <input class="form-control" type="date" id="deadline" name="deadline" value="<?php echo $deadline; ?>"><br/><br/>
 
                                 <?php } ?>
                                 <button type="submit" class="btn btn-primary btn-block"  name="thesis_update" id="thesis_update" >Update</button> <br/><br/>
