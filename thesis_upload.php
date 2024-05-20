@@ -124,6 +124,12 @@ if(isset($_POST['thesis_update'])) {
         $thesis_id = FILTER_INPUT(INPUT_POST, 'thesis_id', FILTER_SANITIZE_STRING);
         $abstract = FILTER_INPUT(INPUT_POST, 'abstract', FILTER_SANITIZE_STRING);    
         $teacherId = FILTER_INPUT(INPUT_POST, 'teacher', FILTER_SANITIZE_STRING);
+
+        $deadline = "";
+        if($role == 'teacher'){  
+            $deadline = FILTER_INPUT(INPUT_POST, 'deadline', FILTER_SANITIZE_STRING);
+        }
+
         $target_tmp = $_FILES["fileToUpload"]["tmp_name"];
         $status = 0;
     
@@ -203,13 +209,22 @@ if(isset($_POST['thesis_update'])) {
                 } else {
                     $paramsok = true;
     
-                    // query for update story without any new image
-                    $sql = "update thesis set title=?, abstract=?, teacher_id=?  where id = ?";
-                    $stmt = $dbh->prepare($sql);
-                    // set value to query
-                    $params = [$title, $abstract ,$teacherId, $thesis_id];
-    //           print_r($params);
-                    $result = $stmt->execute($params);
+                    if($role == 'teacher'){
+                        $sql = "update thesis set title=?, abstract=?, teacher_id=?, deadline=?  where id = ?";
+                        $stmt = $dbh->prepare($sql);
+                        // set value to query
+                        $params = [$title, $abstract ,$teacherId, $deadline, $thesis_id];
+        //           print_r($params);
+                        $result = $stmt->execute($params);
+                    }else{
+                        $sql = "update thesis set title=?, abstract=?, teacher_id=?  where id = ?";
+                        $stmt = $dbh->prepare($sql);
+                        // set value to query
+                        $params = [$title, $abstract ,$teacherId, $thesis_id];
+        //           print_r($params);
+                        $result = $stmt->execute($params);
+                    }
+                    
                 }
             }
             }

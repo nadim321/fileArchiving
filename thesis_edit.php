@@ -3,7 +3,7 @@ include "menu.php";
 include 'connect.php';
 $loggedInUser = $_SESSION["username"];
 $loggedInUserRole = $_SESSION["role"];
-if($loggedInUserRole =="admin"){
+if($loggedInUserRole =="admin" || $loggedInUserRole =="teacher"){
 // get data from
 $thesis_id = FILTER_INPUT(INPUT_GET, 'thesis_id', FILTER_SANITIZE_STRING);
 // get story details
@@ -59,6 +59,10 @@ if ($stmt->rowCount()) {
                                 <br/>
                                 <object data="<?php echo $file_path; ?>" type="application/pdf" width="100%" height="500px" ></object><br/><br/>
                                 <input class="form-control" type="file" id="fileToUpload" name="fileToUpload"><br/><br/>
+                                <?php if($loggedInUserRole == 'teacher'){ ?>
+                                    <input class="form-control" type="date" id="deadline" name="deadline"><br/><br/>
+
+                                <?php } ?>
                                 <button type="submit" class="btn btn-primary btn-block"  name="thesis_update" id="thesis_update" >Update</button> <br/><br/>
                             </form>
                         </div>
