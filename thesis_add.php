@@ -93,6 +93,11 @@ include "thesis.php";
                                     </select>
                             </div>   <br/>
 
+                            <div class="col-md-12">
+                                <label>Summary *</label>
+                                <textarea class="form-control" type="text" name="summary" required></textarea>
+                            </div>   <br/>
+
                             <div class="form-button mt-3">
                                 <button type="submit" class="btn btn-primary btn-block" name="thesis_upload" id="thesis_upload">Upload</button>
                             </div>

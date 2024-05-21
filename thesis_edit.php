@@ -18,6 +18,7 @@ if ($stmt->rowCount()) {
         $id = $row['id'];
         $title = $row['title'];
         $abstract = $row["abstract"];
+        $summary = $row["summary"];
         $teacherId = $row["teacher_id"];
         $file_path = $row["file_path"];
         $deadline = $row["deadline"];
@@ -64,6 +65,7 @@ if ($stmt->rowCount()) {
                                     <input class="form-control" type="date" id="deadline" name="deadline" value="<?php echo $deadline; ?>"><br/><br/>
 
                                 <?php } ?>
+                                <label>Summary : </label><textarea class="form-control" rows="4" name="summary" style="width: 100%;"  ><?php echo $summary; ?> </textarea><br/><br/>
                                 <button type="submit" class="btn btn-primary btn-block"  name="thesis_update" id="thesis_update" >Update</button> <br/><br/>
                             </form>
                         </div>

@@ -44,7 +44,7 @@ if($loggedInUserRole=="teacher"){
 if ($stmt->rowCount()) {
     $i=1;
     // show story table
-    $str =  "<div align='center'> <table id='thesisList' class='table table-striped table-bordered' > <thead><tr><th>SL</th><th>Title</th><th>Abstract</th><th>Supervisor</th><th>Category</th><th>Deadline</th><th>File</th>";
+    $str =  "<div align='center'> <table id='thesisList' class='table table-striped table-bordered' > <thead><tr><th>SL</th><th>Title</th><th>Abstract</th><th>Supervisor</th><th>Category</th><th>Summary</th><th>Deadline</th><th>File</th>";
     if($loggedInUserRole=="admin" || $loggedInUserRole=="teacher"){
         $str .= "<th>Edit</th><th>Delete</th>";
     };
@@ -58,6 +58,7 @@ if ($stmt->rowCount()) {
         $file_path = $row["file_path"] ;
         $categoryName = $row["categoryName"] ;
         $deadline = $row["deadline"] ;
+        $summary = $row["summary"] ;
 
 
 
@@ -67,6 +68,7 @@ if ($stmt->rowCount()) {
         $str .= "<td>$abstract</td>";
         $str .= "<td>$teacherName</td>";
         $str .= "<td>$categoryName</td>";
+        $str .= "<td>$summary</td>";
         $str .= "<td>$deadline</td>";
         $str .= "<td><a href='$file_path' target='blank'/><i class='fa fa-download'></i></td>";
         if($loggedInUserRole=="admin" || $loggedInUserRole=="teacher"){

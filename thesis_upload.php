@@ -12,6 +12,7 @@ if(isset($_POST['thesis_upload'])) {
     $abstract = FILTER_INPUT(INPUT_POST, 'abstract', FILTER_SANITIZE_STRING);    
     $teacherId = FILTER_INPUT(INPUT_POST, 'teacher', FILTER_SANITIZE_STRING);
     $categoryId = FILTER_INPUT(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
+    $summary = FILTER_INPUT(INPUT_POST, 'summary', FILTER_SANITIZE_STRING);
     $target_tmp = $_FILES["fileToUpload"]["tmp_name"];
     $status = 0;
 
@@ -83,10 +84,10 @@ if(isset($_POST['thesis_upload'])) {
                 }
                 else{
                     // query for new story upload
-                    $sql = "INSERT into thesis (title, abstract, teacher_id, username, file_path , status, category_id) VALUES (?,?,?,?,?,?,?)";
+                    $sql = "INSERT into thesis (title, abstract, teacher_id, username, file_path , status, category_id, summary) VALUES (?,?,?,?,?,?,?,?)";
                     $stmt = $dbh->prepare($sql);
                     // set value to query
-                    $params = [$title, $abstract ,$teacherId, $username, $target_Path, $status, $categoryId];
+                    $params = [$title, $abstract ,$teacherId, $username, $target_Path, $status, $categoryId, $summary];
                     //           print_r($params);
                     $result = $stmt->execute($params);
                 }
@@ -124,10 +125,14 @@ if(isset($_POST['thesis_update'])) {
         $thesis_id = FILTER_INPUT(INPUT_POST, 'thesis_id', FILTER_SANITIZE_STRING);
         $abstract = FILTER_INPUT(INPUT_POST, 'abstract', FILTER_SANITIZE_STRING);    
         $teacherId = FILTER_INPUT(INPUT_POST, 'teacher', FILTER_SANITIZE_STRING);
+        $summary = FILTER_INPUT(INPUT_POST, 'summary', FILTER_SANITIZE_STRING);
 
-        $deadline = "";
+
+        $deadline = null;
         if($role == 'admin' || $role == 'teacher'){  
-            $deadline = FILTER_INPUT(INPUT_POST, 'deadline', FILTER_SANITIZE_STRING);
+            if(FILTER_INPUT(INPUT_POST, 'deadline', FILTER_SANITIZE_STRING)){
+                $deadline = FILTER_INPUT(INPUT_POST, 'deadline', FILTER_SANITIZE_STRING);
+            }
         }
 
         $target_tmp = $_FILES["fileToUpload"]["tmp_name"];
@@ -200,30 +205,34 @@ if(isset($_POST['thesis_update'])) {
                     // prepare query for insert data
                     $paramsok = true;
                     // query for update story with new image
-                    $sql = "update thesis set title=?, abstract=?, teacher_id=?, file_path=? where id = ?";
+                    $sql = "update thesis set title=?, abstract=?, teacher_id=?, file_path=?, deadline=?, summary=? where id = ?";
                     $stmt = $dbh->prepare($sql);
                     // set value to query
-                    $params = [$title, $abstract ,$teacherId, $target_Path, $thesis_id];
+                    $params = [$title, $abstract ,$teacherId, $target_Path, $deadline, $summary, $thesis_id];
     //           print_r($params);
                     $result = $stmt->execute($params);
                 } else {
                     $paramsok = true;
     
                     if($role == 'admin' || $role == 'teacher'){
-                        $sql = "update thesis set title=?, abstract=?, teacher_id=?, deadline=?  where id = ?";
+                        $sql = "update thesis set title=?, abstract=?, teacher_id=?, deadline=?, summary=?  where id = ?";
                         $stmt = $dbh->prepare($sql);
                         // set value to query
-                        $params = [$title, $abstract ,$teacherId, $deadline, $thesis_id];
-        //           print_r($params);
+                        $params = [$title, $abstract ,$teacherId, $deadline, $summary, $thesis_id];
+                 
                         $result = $stmt->execute($params);
+                        
                     }else{
-                        $sql = "update thesis set title=?, abstract=?, teacher_id=?  where id = ?";
+                        $sql = "update thesis set title=?, abstract=?, teacher_id=?, summary=?  where id = ?";
                         $stmt = $dbh->prepare($sql);
                         // set value to query
-                        $params = [$title, $abstract ,$teacherId, $thesis_id];
-        //           print_r($params);
+                        $params = [$title, $abstract ,$teacherId, $summary, $thesis_id];
+                  
                         $result = $stmt->execute($params);
+                        
                     }
+
+
                     
                 }
             }
