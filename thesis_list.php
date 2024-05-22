@@ -24,7 +24,7 @@ $loggedInUserRole = $_SESSION["role"];
 <?php
 // query for get story for logged in user
 if($loggedInUserRole=="teacher"){
-    $sql = "SELECT a.*, b.name as teacherName, c.name as categoryName FROM thesis a 
+    $sql = "SELECT a.*,a.status as status, b.name as teacherName, c.name as categoryName FROM thesis a 
         left join teacher b on  a.teacher_id = b.id 
         LEFT JOIN category c on a.category_id = c.id
         where a.status = 1 and a.deleted = 0 and c.deleted=0 and b.user = ? order by a.id desc";
@@ -32,10 +32,10 @@ if($loggedInUserRole=="teacher"){
     $params = [$loggedInUser];
     $result = $stmt->execute($params);
 }else{
-    $sql = "SELECT a.*, b.name as teacherName, c.name as categoryName FROM thesis a 
+    $sql = "SELECT a.*,a.status as status, b.name as teacherName, c.name as categoryName FROM thesis a 
         left join teacher b on  a.teacher_id = b.id 
         left join category c on a.category_id = c.id                                 
-        where a.status = 1 and a.deleted = 0 and c.deleted = 0 order by a.id desc";
+        where a.deleted = 0 and c.deleted = 0 order by a.id desc";
     $stmt = $dbh->prepare($sql);
     $result = $stmt->execute();
 }
@@ -47,6 +47,8 @@ if ($stmt->rowCount()) {
     $str =  "<div align='center'> <table id='thesisList' class='table table-striped table-bordered' > <thead><tr><th>SL</th><th>Title</th><th>Abstract</th><th>Supervisor</th><th>Category</th><th>Summary</th><th>Deadline</th><th>File</th>";
     if($loggedInUserRole=="admin" || $loggedInUserRole=="teacher"){
         $str .= "<th>Edit</th><th>Delete</th>";
+    }else if($loggedInUserRole=="student" ){
+        $str .= "<th>Edit</th>";
     };
     $str .= "</tr></thead><tbody>";
     while ($row = $stmt->fetch()) {
@@ -59,6 +61,7 @@ if ($stmt->rowCount()) {
         $categoryName = $row["categoryName"] ;
         $deadline = $row["deadline"] ;
         $summary = $row["summary"] ;
+        $status = $row["status"] ;
 
 
 
@@ -74,6 +77,9 @@ if ($stmt->rowCount()) {
         if($loggedInUserRole=="admin" || $loggedInUserRole=="teacher"){
             $str .= "<td><a href='thesis_edit.php?thesis_id=$id'>Edit</a></td>";
             $str .= "<td><div align='center'><i class='fa fa-times-circle' style='font-size: 13px ; color: red' onclick='deleteThesis($id)'></i></div></td>";
+        }
+        else if($loggedInUserRole=="student" && $status == '0'){
+            $str .= "<td><a href='thesis_edit.php?thesis_id=$id'>Edit</a></td>";
         }
         $str .= "</tr>";
         $i++;
