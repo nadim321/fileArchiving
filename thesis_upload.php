@@ -102,7 +102,7 @@ if(isset($_POST['thesis_upload'])) {
 // if all parameter ok and execute the query successfully
     if ($paramsok) {
         if ($result) {
-            header("location:thesis_list.php");
+            echo "<script> window.location.href='thesis_list.php'</script>";
         } else {
             echo "<p>Failed to upload thesis.</p>";
         }

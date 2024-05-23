@@ -3,7 +3,7 @@
 session_start();
 if (isset($_SESSION["username"]) && isset($_SESSION["isLoggedIn"])) {
     if ($_SESSION["isLoggedIn"] == true) {
-        header("location: thesis_list.php");
+        echo "<script> window.location.href='thesis_list.php'</script>";
     }
 }
 ?>

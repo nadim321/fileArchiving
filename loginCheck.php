@@ -25,16 +25,15 @@ if ($paramsok) {
                 $_SESSION["username"] = $username;
                 $_SESSION["role"] = $role;
                 $_SESSION["isLoggedIn"] = true;
-
-                header("location: thesis_list.php");
+                echo "<script> window.location.href='thesis_list.php'</script>";
             }else {
-                header("location: login.php?err=1");
+                echo "<script> window.location.href='login.php'</script>";
             }
         }
 
     } 
     else {
-        header("location: login.php");
+        echo "<script> window.location.href='login.php'</script>";
     }
 } else {
     echo "<p>Something was wrong with your parameters!</p>";

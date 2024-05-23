@@ -75,9 +75,9 @@ if (
 // if all parameter ok and execute the query successfully
 if ($paramsok) {
     if ($result) {
-        header("location:login.php?success=true");
+        echo "<script> window.location.href='login.php?success=true'</script>";
     } else {
-        header("location:login.php?success=false");
+        echo "<script> window.location.href='login.php?success=false'</script>";
     }
 } else {
     echo "<p>Something was wrong with your parameters!</p>";
