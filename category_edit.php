@@ -29,8 +29,7 @@ if($loggedInUserRole =="admin"){
             $result = $stmt->execute($params);
             // print_r($result);
             // if($result->)
-
-            header("location:category_list.php");
+            echo "<script> window.location.href='category_list.php'</script>";
         
         }       
 

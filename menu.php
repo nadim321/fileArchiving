@@ -3,14 +3,14 @@
 session_start();
 if (isset($_SESSION["username"]) && isset($_SESSION["isLoggedIn"])) {
     if ($_SESSION["isLoggedIn"] != true) {
-        header("location: login.php");
+        echo "<script> window.location.href='login.php'</script>";
     }else{
         $loggedInUser = $_SESSION["username"];
         $loggedInUserRole = $_SESSION["role"];
     }
 
 } else {
-    header("location: login.php");
+    echo "<script> window.location.href='login.php'</script>";
 }
 ?>
 

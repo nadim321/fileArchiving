@@ -35,8 +35,7 @@ if($loggedInUserRole =="admin"){
             $result = $stmt->execute($params);
             // print_r( $result);
             // if($result->)
-
-            header("location:user_list.php");
+            echo "<script> window.location.href='user_list.php'</script>";
         
         }
         

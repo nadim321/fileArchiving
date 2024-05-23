@@ -15,7 +15,7 @@ $teacher_id = FILTER_INPUT(INPUT_GET, 'teacher_id', FILTER_SANITIZE_STRING);
 
 //  after delete user also destroy session
         if ($result) {
-            header("location:teacher_list.php");
+            echo "<script> window.location.href='teacher_list.php'</script>";
         } else {
             echo "<p>Failed to delete</p>";
         }

@@ -16,8 +16,7 @@ if($loggedInUserRole =="admin"){
             // set value to query
             $params = [1, $thesis_id];
             $result = $stmt->execute($params);
-
-            header("location:thesis_upload_request.php");
+            echo "<script> window.location.href='thesis_upload_request.php'</script>";
           
 
     }

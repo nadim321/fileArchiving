@@ -31,9 +31,9 @@ include 'connect.php';
         // if all parameter ok and execute the query successfully
         if ($paramsok) {
             if ($result) {
-                header("location:category_list.php");
-            } else {
-                header("location:category_add.php");
+                echo "<script> window.location.href='category_list.php'</script>";
+            } else {                
+                echo "<script> window.location.href='category_add.php'</script>";
             }
         } else {
             echo "<p style='color:#fff;'>Something was wrong with your parameters!</p>";

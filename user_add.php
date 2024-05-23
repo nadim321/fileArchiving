@@ -75,9 +75,9 @@ include "user.php";
         // if all parameter ok and execute the query successfully
         if ($paramsok) {
             if ($result) {
-                header("location:user_list.php");
+                echo "<script> window.location.href='user_list.php'</script>";
             } else {
-                header("location:user_add.php");
+                echo "<script> window.location.href='user_add.php'</script>";
             }
         } else {
             echo "<p>Something was wrong with your parameters!</p>";

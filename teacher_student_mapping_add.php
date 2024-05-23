@@ -33,9 +33,9 @@ include 'connect.php';
         // if all parameter ok and execute the query successfully
         if ($paramsok) {
             if ($result) {
-                header("location:teacher_student_mapping_list.php");
+                echo "<script> window.location.href='teacher_student_mapping_list.php'</script>";
             } else {
-                header("location:teacher_student_mapping_add.php");
+                echo "<script> window.location.href='teacher_student_mapping_add.php'</script>";
             }
         } else {
             echo "<p style='color:#fff;'>Something was wrong with your parameters!</p>";
